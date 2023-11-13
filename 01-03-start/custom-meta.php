@@ -11,6 +11,11 @@
  */
 
 
+
+// Get Post Meta
+
+
+
 function lil_set_custom_meta() {
 	$meta_key = 'greeting';
 	$meta_value = '"Hello There!"';
@@ -34,7 +39,7 @@ function lil_set_custom_meta() {
 }
 
 function lil_get_custom_meta() {
-
+	return '<p>' . get_post_meta( get_the_ID(), 'greeting', true ) . '</p>';
 }
 
  function lil_shortcodes_init(){
