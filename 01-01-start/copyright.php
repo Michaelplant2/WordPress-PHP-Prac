@@ -12,7 +12,7 @@
 
 
  function lil_copyright_line() {
-	
+	return '&copy; 2020 - ' . date('Y');
  }
 
 
