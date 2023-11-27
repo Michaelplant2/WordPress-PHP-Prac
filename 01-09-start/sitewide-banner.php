@@ -10,11 +10,16 @@
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  */
 
+
+// Site wide banner on top
+
+
 function lil_sitewide_banner() {
 	echo '<div class="banner">Join Us for Our Free Webinar!</div>';
 }
 
 function lil_banner_styles() {
+	$top = ( is_user_logged_in() ) ? '32px' : '0';
 ?>
 	<style>
 		.banner {
@@ -24,7 +29,7 @@ function lil_banner_styles() {
 			font-weight: bold;
 			padding: 15px;
 			position: fixed;
-  			top: 0;
+  			top: <?php echo $top ?>;
   			left: 0;
   			right: 0;
 			text-align: center;
@@ -33,4 +38,5 @@ function lil_banner_styles() {
 <?
 }
 
-
+add_action( 'wp_head', 'lil_banner_styles' );
+add_action( 'wp_footer', 'lil_sitewide_banner' );
