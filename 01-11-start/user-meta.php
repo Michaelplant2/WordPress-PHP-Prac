@@ -11,15 +11,23 @@
  */
 
 
-// Store login times for user
+// Store login times for current logged in user
 
 
  function lil_last_logged_in( $user_login, $user ) {
 	$meta_key = 'lil_last_logged_in';
- }
+
+	if ( empty( get_user_meta( $user->ID, $meta_key, false) ) ) {
+		add_user_meta( $user->ID, $meta_key, current_datetime()->format('Y-m-d H:i:s') );
+ 	} else {
+	   update_user_meta( $user->ID, $meta_key, current_datetime()->format('Y-m-d H:i:s') );
+ 	}
+
+	return true;
+}
  
  // Replace the Hook with the Appropriate One
- add_action( 'admin_init', 'lil_last_logged_in');
+ add_action( 'wp_login', 'lil_last_logged_in', 10, 2 );
 
  function lil_show_last_login( $user_id = false ) {
 	$user_id = ( ! $user_id ) ? get_current_user_id() : $user_id;
