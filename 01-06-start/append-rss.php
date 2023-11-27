@@ -11,10 +11,16 @@
  */
 
 
-// Append Message to RSS
+// Append Message to RSS for members only
 
 
 function lil_append_rss() {
+   if ( is_feed() && in_category( 4, get_the_ID() ) ) {
+      $content = '<p>This content is for members only. <a href="#">Join Here</a>.</p>';
+   }
 
+   return $content;
 }
 
+add_filter('get_the_excerpt','lil_append_rss');
+add_filter('the_content','lil_append_rss');
