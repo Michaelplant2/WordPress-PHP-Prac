@@ -10,13 +10,24 @@
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  */
 
+
+// Displaying data from a database
+
+
 function lil_escape_output() {
 	/*** This input would come from forms or fields inside WordPress ***/
-	$name = "Jack <> Coder";
-	$email = "jack~!coder@<coder>.tld";
-	$url = "https://<coder>.tld";
+	$name = "Michael <Plantamura>";
+	$email = "MEPlantamura@<gmail>.com";
+	$url = "https://<mplantamura>.com";
 
-	return $output;
+	$format = '<h3><a href="%1$s">%2$s</a></h3><p>Email: %3$s</p>';
+
+
+	return sprintf( $format,
+		esc_url( $url ),
+		esc_html( $name ),
+		esc_html( $email ),
+	);
 }
 
 function lil_shortcodes_init(){
