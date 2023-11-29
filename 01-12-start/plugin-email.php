@@ -10,9 +10,21 @@
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  */
 
- function lil_send_email() {
-	
+
+// Notify email when user activates a plugin
+
+
+ function lil_send_email($plugin, $network_activation) {
+   $admin_email = get_option('admin_email');
+
+   $plugin = explode('/', $plugin);
+   $subject = 'New Active Plugin';
+   $message = 'Hello! This is to let you know the plugin, ' . $plugin[0] . ', has been activated.';
+   $headers = 'From: WordPress Admin <meplantamura@gmail.com>';
+
+   wp_mail( $admin_email, $subject, $message, $headers ) or die('The email was not sent.');
+   return true;
  }
  
  // Replace the Hook with the Appropriate One
- add_action( 'admin_init', 'lil_send_email');
+ add_action( 'activated_plugin', 'lil_send_email', 10, 2 );
